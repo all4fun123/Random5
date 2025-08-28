@@ -164,7 +164,12 @@ async def get_cookies(client: httpx.AsyncClient, username, login_cookies):
 async def run_event_flow(username, key, state):
     """Chạy luồng sự kiện cho một tài khoản với client riêng"""
     limits = httpx.Limits(max_connections=1, max_keepalive_connections=1, keepalive_expiry=0)
-    async with httpx.AsyncClient(timeout=3.0, http2=False, limits=limits) as client:
+    # Define proxy (e.g., HTTP or HTTPS proxy)
+    proxies = {
+        "http://": "http://160.191.48.160:6588",
+        "https://": "http://160.191.48.160:6588"  # Use the same or different proxy for HTTPS
+    }
+    async with httpx.AsyncClient(timeout=3.0, http2=False, limits=limits, proxies=proxies) as client:
         retry_count = 0
         max_retries = 10
         while retry_count < max_retries:
@@ -259,8 +264,8 @@ async def run_event_flow(username, key, state):
                         "func": "wish-send",
                         "data": {
                             "AuthenType": 0,
-                            "ProvinceID": 59,
-                            "ProvinceName": "TP.Hồ Chí Minh",
+                            "ProvinceID": 65,
+                            "ProvinceName": "Khác",
                             "Content": "Thắp sáng bản đồ Việt Nam cùng Audition!"
                         }
                     }
