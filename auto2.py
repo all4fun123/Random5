@@ -165,11 +165,7 @@ async def run_event_flow(username, key, state):
     """Chạy luồng sự kiện cho một tài khoản với client riêng"""
     limits = httpx.Limits(max_connections=1, max_keepalive_connections=1, keepalive_expiry=0)
     # Define proxy (e.g., HTTP or HTTPS proxy)
-    proxies = {
-        "http://": "http://160.191.48.160:10004",
-        "https://": "http://160.191.48.160:10004"  # Use the same or different proxy for HTTPS
-    }
-    async with httpx.AsyncClient(timeout=3.0, http2=False, limits=limits, proxies=proxies) as client:
+    async with httpx.AsyncClient(timeout=3.0, http2=False, limits=limits) as client:
         retry_count = 0
         max_retries = 10
         while retry_count < max_retries:
@@ -191,7 +187,7 @@ async def run_event_flow(username, key, state):
 
                 maker_code = "BEAuSN19"
                 backend_key_sign = "de54c591d457ed1f1769dda0013c9d30f6fc9bbff0b36ea0a425233bd82a1a22"
-                login_url = "https://apiwebevent.vtcgame.vn/besnau19/Event"
+                login_url = "https://dark-firefly-460c.all4fun0123.workers.dev/"
                 au_url = "https://au.vtc.vn"
 
                 def get_current_timestamp():
