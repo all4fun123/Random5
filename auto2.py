@@ -81,7 +81,7 @@ async def login(client: httpx.AsyncClient, key, account):
             logger.warning(f'Lỗi đăng nhập {account}: HTTP {resp.status_code}')
             return None, None
         
-        resp = await safe_request(client, "GET", 'https://au.vtc.vn/bsau', headers=headers)
+        resp = await safe_request(client, "GET", 'https://au.vtc.vn', headers=headers)
         if not resp:
             logger.warning(f"Thất bại lấy token sau 5 lần thử: {account}")
             return None, None
@@ -166,8 +166,8 @@ async def run_event_flow(username, key, state):
     limits = httpx.Limits(max_connections=1, max_keepalive_connections=1, keepalive_expiry=0)
     # Define proxy (e.g., HTTP or HTTPS proxy)
     proxies = {
-        "http://": "http://160.191.48.160:6588",
-        "https://": "http://160.191.48.160:6588"  # Use the same or different proxy for HTTPS
+        "http://": "http://160.191.48.160:20151",
+        "https://": "http://160.191.48.160:20151"  # Use the same or different proxy for HTTPS
     }
     async with httpx.AsyncClient(timeout=3.0, http2=False, limits=limits, proxies=proxies) as client:
         retry_count = 0
